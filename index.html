@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Élysée — 米其林三星法餐厅</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Serif+SC:wght@300;400&family=Jost:wght@200;300&display=swap" rel="stylesheet">
+<style>
+/* ========== 设计系统 ========== */
+:root {
+  --bg: #0a0a0a;
+  --gold: #c9a96a;
+  --gold-light: #e0c896;
+  --cream: #f5f1e8;
+  --cream-dim: #a8a39a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;              /* 极简单屏：禁止滚动 */
+}
+
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Noto Serif SC', 'Cormorant Garamond', serif;
+  font-weight: 300;
+}
+
+/* ========== 背景大图 + 暗色遮罩 ========== */
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+                rgba(10,10,10,0.55),
+                rgba(10,10,10,0.75)
+              ),
+              url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=2000&q=85') center/cover;
+  filter: brightness(0.75);
+  transform: scale(1.05);        /* 轻微放大，避免边缘留白 */
+  animation: slowZoom 20s ease-in-out infinite alternate;
+}
+@keyframes slowZoom {
+  from { transform: scale(1.05); }
+  to   { transform: scale(1.12); }
+}
+
+/* ========== 顶部导航（极简：只留 Logo 和预订按钮） ========== */
+.nav {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  padding: 36px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  color: var(--cream);
+}
+.nav-logo span { color: var(--gold); }
+.nav-cta {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+  padding: 14px 30px;
+  border: 1px solid rgba(245, 241, 232, 0.3);
+  transition: all 0.4s;
+}
+.nav-cta:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ========== 中央内容 ========== */
+.hero-content {
+  position: relative;
+  z-index: 5;
+  padding: 0 24px;
+  animation: fadeInUp 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-tagline {
+  font-family: 'Jost', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.55em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(64px, 13vw, 180px);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  margin-bottom: 28px;
+}
+.hero-title span {
+  color: var(--gold);
+  font-style: italic;
+}
+
+.hero-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2vw, 26px);
+  color: var(--cream);
+  font-weight: 300;
+  margin-bottom: 44px;
+  letter-spacing: 0.05em;
+}
+
+.hero-stars {
+  font-size: 16px;
+  color: var(--gold);
+  letter-spacing: 0.6em;
+  margin-bottom: 56px;
+  padding-left: 0.6em;           /* 抵消 letter-spacing 偏移 */
+}
+
+.hero-cta {
+  display: inline-block;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--cream);
+  text-decoration: none;
+  border: 1px solid var(--gold);
+  padding: 20px 56px;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s;
+}
+/* 按钮金色填充扫过动效 */
+.hero-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateY(101%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+.hero-cta:hover { color: var(--bg); }
+.hero-cta:hover::before { transform: translateY(0); }
+
+/* ========== 底部副信息 ========== */
+.hero-footer {
+  position: absolute;
+  bottom: 36px;
+  left: 0; right: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  font-family: 'Jost', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: var(--cream-dim);
+  text-transform: uppercase;
+}
+.hero-footer span { position: relative; }
+.hero-footer span:not(:last-child)::after {
+  content: '·';
+  position: absolute;
+  right: -28px;
+  color: var(--gold);
+}
+
+/* ========== 响应式：手机 ========== */
+@media (max-width: 768px) {
+  .nav { padding: 24px 28px; }
+  .nav-logo { font-size: 22px; letter-spacing: 0.3em; }
+  .nav-cta { padding: 10px 20px; font-size: 10px; }
+  .hero-tagline { font-size: 10px; letter-spacing: 0.45em; margin-bottom: 28px; }
+  .hero-subtitle { margin-bottom: 36px; }
+  .hero-stars { margin-bottom: 40px; }
+  .hero-cta { padding: 16px 40px; font-size: 11px; }
+  .hero-footer {
+    gap: 24px;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    flex-wrap: wrap;
+    padding: 0 20px;
+  }
+  .hero-footer span:not(:last-child)::after { right: -14px; }
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <!-- 背景图 -->
+  <div class="hero-bg"></div>
+
+  <!-- 顶部导航 -->
+  <nav class="nav">
+    <div class="nav-logo">ÉLY<span>SÉE</span></div>
+    <a href="#" class="nav-cta">预订席位</a>
+  </nav>
+
+  <!-- 中央主视觉 -->
+  <div class="hero-content">
+    <div class="hero-tagline">Michelin Three Stars</div>
+    <h1 class="hero-title">Ély<span>sée</span></h1>
+    <p class="hero-subtitle">光影之间，味觉的诗</p>
+    <div class="hero-stars">★ ★ ★</div>
+    <a href="#" class="hero-cta">预 订 品 鉴</a>
+  </div>
+
+  <!-- 底部副信息 -->
+  <div class="hero-footer">
+    <span>Est. 2008</span>
+    <span>Shanghai</span>
+    <span>French Cuisine</span>
+  </div>
+</section>
+
+</body>
+</html>
